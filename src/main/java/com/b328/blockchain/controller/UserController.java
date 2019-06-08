@@ -1,6 +1,7 @@
 package com.b328.blockchain.controller;
 
 import com.b328.blockchain.entity.User;
+import com.b328.blockchain.pojo.vo.VueChangPswdVo;
 import com.b328.blockchain.pojo.vo.VueLoginInfoVo;
 import com.b328.blockchain.result.Result;
 import com.b328.blockchain.result.ResultCode;
@@ -37,10 +38,8 @@ public class UserController {
                 return ResultFactory.buildFailResult(ResultCode.FAIL);
             }
         } catch (NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return ResultFactory.buildSuccessResult("登陆成功。");
@@ -72,8 +71,30 @@ public class UserController {
         userService.addUser(user1);
         return ResultFactory.buildSuccessResult("注册成功。");
     }
+
+
+
     @CrossOrigin
-    @RequestMapping(value = "testregister", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "/changepswd", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+    public Result changePassword(@Valid @RequestBody VueChangPswdVo changPswdVo){
+        User user = userService.getUser(changPswdVo.getUsername());
+        String encryptedPwd = null;
+        try {
+            if (!Md5SaltTool.validPassword(changPswdVo.getOld_password(),user.getUser_password())){
+                return ResultFactory.buildFailResult(ResultCode.FAIL);
+            }
+            encryptedPwd = Md5SaltTool.getEncryptedPwd(changPswdVo.getNew_password());
+            user.setUser_password(encryptedPwd);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return ResultFactory.buildSuccessResult("修改密码成功。");
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "testregister", method = RequestMethod.POST)
     public Result testregister(@RequestParam(value="username") String username, @RequestParam(value="password") String password) {
         User user=userService.getUser(username);
         if (user!=null){
@@ -86,6 +107,26 @@ public class UserController {
         user1.setUser_password(password);
         userService.addUser(user1);
         return ResultFactory.buildSuccessResult("注册成功。");
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/cp", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+    public Result testChangePswd(@RequestParam(value="username") String username, @RequestParam(value="old_password") String old_password, @RequestParam(value="new_password") String new_password) {
+        User user = userService.getUser(username);
+        String encryptedPwd = null;
+        try {
+            if (!Md5SaltTool.validPassword(old_password,user.getUser_password())){
+                return ResultFactory.buildFailResult(ResultCode.FAIL);
+            }
+            encryptedPwd = Md5SaltTool.getEncryptedPwd(new_password);
+            user.setUser_password(encryptedPwd);
+            userService.changePswd(user);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return ResultFactory.buildSuccessResult("修改密码成功。");
     }
     @RequestMapping("/greeting")
     public String hello() {

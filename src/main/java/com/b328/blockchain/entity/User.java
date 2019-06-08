@@ -1,9 +1,12 @@
 package com.b328.blockchain.entity;
 
+import java.sql.Timestamp;
+
 public class User {
     private Integer user_id;
     private String user_name;
     private String user_password;
+    private Timestamp register_time;
 
     public Integer getUser_id() {
         return user_id;
@@ -27,5 +30,13 @@ public class User {
 
     public void setUser_password(String user_password) {
         this.user_password = user_password;
+    }
+
+    public Timestamp getRegister_time() {
+        return register_time;
+    }
+
+    public void setRegister_time(Timestamp register_time) {
+        this.register_time = register_time;
     }
 }
