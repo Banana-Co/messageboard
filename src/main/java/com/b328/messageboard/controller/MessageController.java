@@ -17,7 +17,7 @@ public class MessageController {
     @Qualifier("MessageService1")
     MessageService messageService;
 
-    @RequestMapping(value = "/api/getMessagePage", method = RequestMethod.POST)
+    @RequestMapping(value = "/getMessagePage", method = RequestMethod.POST)
     @ResponseBody
     public PageInfo<Message> getMessagePage(@RequestBody MessagePageVo messagePageVo) {
         List<Message> messages = messageService.getMessagePage(messagePageVo.getPageNum(), messagePageVo.getPageSize());
@@ -25,12 +25,12 @@ public class MessageController {
         return pageInfo;
     }
 
-    @RequestMapping(value = "/api/getMessage/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getMessage/{id}", method = RequestMethod.GET)
     public Message getMessageById(@PathVariable(name = "id") int id) {
         return messageService.getMessageById(id);
     }
 
-    @RequestMapping(value = "/api/addMessage", method = RequestMethod.POST)
+    @RequestMapping(value = "/addMessage", method = RequestMethod.POST)
     @ResponseBody
     public int addMessage(@RequestBody Message message) {
         if (message.getContent().equals("") || message.getTitle().equals(""))
