@@ -2,7 +2,7 @@ package com.b328.messageboard.controller;
 
 import com.b328.messageboard.entity.Message;
 import com.b328.messageboard.entity.vo.MessagePageVo;
-import com.b328.messageboard.serivce.MessageService;
+import com.b328.messageboard.service.MessageService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

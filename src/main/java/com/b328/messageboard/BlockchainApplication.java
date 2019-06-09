@@ -5,12 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.b328.messageboard.dao")
-@MapperScan("com.b328.messageboard.mapper")
-public class MessageboardApplication {
-
+@MapperScan("com.b328.blockchain.mapper")
+public class BlockchainApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MessageboardApplication.class, args);
+        SpringApplication.run(BlockchainApplication.class, args);
     }
-
 }

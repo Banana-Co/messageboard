@@ -1,10 +1,8 @@
-package com.b328.messageboard.serivce;
+package com.b328.messageboard.service;
 
 import com.b328.messageboard.dao.MessageMapper;
 import com.b328.messageboard.entity.Message;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

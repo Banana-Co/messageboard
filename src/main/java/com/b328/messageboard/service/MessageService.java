@@ -1,4 +1,4 @@
-package com.b328.messageboard.serivce;
+package com.b328.messageboard.service;
 
 import com.b328.messageboard.entity.Message;
 import com.github.pagehelper.PageInfo;
