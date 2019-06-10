@@ -11,6 +11,17 @@ public class Message {
     private String author;
     private String title;
     private String content;
+    private int like_number;
+
+    public int getLike_number() {
+        return like_number;
+    }
+
+    public void setLike_number(int like_number) {
+        this.like_number = like_number;
+    }
+
+
 
     public int getId() {
         return id;
