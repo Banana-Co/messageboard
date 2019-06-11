@@ -69,7 +69,7 @@ public class MessageController {
      * @return
      */
     @CrossOrigin
-    @RequestMapping(value = "/addLike/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/addLike", method = RequestMethod.POST)
     @ResponseBody
     public void addLike(/*@PathVariable(name = "id") int id*/@Valid @RequestBody LikeInfoVo likeInfoVo) {
         Integer uid = userService.getIdByName(likeInfoVo.getUser_name());
