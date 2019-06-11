@@ -1,7 +1,13 @@
 package com.b328.messageboard.entity.vo;
 
 public class LikeInfoVo {
+    /**
+     * 用户名
+     */
     String user_name;
+    /**
+     * 留言号
+     */
     Integer message_id;
 
     public String getUser_name() {

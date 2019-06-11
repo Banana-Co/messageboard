@@ -5,12 +5,30 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class Message {
+    /**
+     * 留言号
+     */
     private Integer id;
+    /**
+     *留言时间
+     */
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
+    /**
+     * 留言者
+     */
     private String author;
+    /**
+     * 留言标题
+     */
     private String title;
+    /**
+     * 留言内容
+     */
     private String content;
+    /**
+     * 留言喜爱数
+     */
     private int like_number;
 
     public int getLike_number() {

@@ -3,7 +3,13 @@ package com.b328.messageboard.entity;
 import com.b328.messageboard.entity.vo.LikeInfoVo;
 
 public class Likes {
+    /**
+     * 用户号
+     */
     private Integer user_id;
+    /**
+     * 信息号
+     */
     private Integer message_id;
 
     public Integer getUser_id() {

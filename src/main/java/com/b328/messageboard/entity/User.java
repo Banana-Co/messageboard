@@ -3,9 +3,21 @@ package com.b328.messageboard.entity;
 import java.sql.Timestamp;
 
 public class User {
+    /**
+     * 用户号
+     */
     private Integer user_id;
+    /**
+     * 用户名
+     */
     private String user_name;
+    /**
+     * 用户密码
+     */
     private String user_password;
+    /**
+     * 用户注册时间
+     */
     private Timestamp register_time;
 
     public Integer getUser_id() {

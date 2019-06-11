@@ -27,9 +27,9 @@ public class MessageController {
     UserService userService;
 
     /**
-     *
+     *向前端返回消息页面
      * @param messagePageVo
-     * @return
+     * @return PageInfo<Message>
      */
     @CrossOrigin
     @RequestMapping(value = "/getMessagePage", method = RequestMethod.POST)
@@ -43,7 +43,7 @@ public class MessageController {
     /**
      * 通过id检索留言信息
      * @param id
-     * @return
+     * @return Message
      */
     @CrossOrigin
     @RequestMapping(value = "/getMessage/{id}", method = RequestMethod.GET)
@@ -54,7 +54,7 @@ public class MessageController {
     /**
      * 添加一个留言
      * @param message
-     * @return
+     * @return int
      */
     @CrossOrigin
     @RequestMapping(value = "/addMessage", method = RequestMethod.POST)
@@ -68,7 +68,7 @@ public class MessageController {
     /**
      * 为当前留言添加一个赞
      * @param likeInfoVo
-     * @return
+     * @return Result
      */
     @CrossOrigin
     @RequestMapping(value = "/addLike", method = RequestMethod.POST)
@@ -91,7 +91,6 @@ public class MessageController {
     /**
      * 为当前留言取消一个赞
      * @param likeInfoVo
-     * @return
      */
     @CrossOrigin
     @RequestMapping(value = "/addDislike/{id}", method = RequestMethod.POST)
@@ -111,7 +110,7 @@ public class MessageController {
     /**
      * 判断是否存在此点赞信息
      * @param likes
-     * @return
+     * @return boolean
      */
     public boolean hasLike(Likes likes){
         return IMessageService.hasLike(likes);

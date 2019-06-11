@@ -21,6 +21,13 @@ import java.util.List;
 public class UserController {
     @Autowired
     private IUserService userService;
+
+    /**
+     * 登录
+     * @param loginInfoVo
+     * @param bindingResult
+     * @return Result
+     */
     @CrossOrigin
     @RequestMapping(value = "login", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     public Result login(@Valid @RequestBody VueLoginInfoVo loginInfoVo, BindingResult bindingResult) {
@@ -43,6 +50,13 @@ public class UserController {
         }
         return ResultFactory.buildSuccessResult("登陆成功。");
     }
+
+    /**
+     * 注册
+     * @param loginInfoVo
+     * @param bindingResult
+     * @return Result
+     */
     @CrossOrigin
     @RequestMapping(value = "register", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     public Result register(@Valid @RequestBody VueLoginInfoVo loginInfoVo, BindingResult bindingResult) {
@@ -72,7 +86,11 @@ public class UserController {
     }
 
 
-
+    /**
+     * 修改密码
+     * @param changPswdVo
+     * @return Result
+     */
     @CrossOrigin
     @RequestMapping(value = "/changepswd", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     public Result changePassword(@Valid @RequestBody VueChangPswdVo changPswdVo){
@@ -93,6 +111,12 @@ public class UserController {
         return ResultFactory.buildSuccessResult("修改密码成功。");
     }
 
+    /**
+     * 测试注册
+     * @param username
+     * @param password
+     * @return Result
+     */
     @CrossOrigin
     @RequestMapping(value = "testregister", method = RequestMethod.POST)
     public Result testregister(@RequestParam(value="username") String username, @RequestParam(value="password") String password) {
@@ -109,6 +133,13 @@ public class UserController {
         return ResultFactory.buildSuccessResult("注册成功。");
     }
 
+    /**
+     * 测试修改密码
+     * @param username
+     * @param old_password
+     * @param new_password
+     * @return Result
+     */
     @CrossOrigin
     @RequestMapping(value = "/cp", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     public Result testChangePswd(@RequestParam(value="username") String username, @RequestParam(value="old_password") String old_password, @RequestParam(value="new_password") String new_password) {
@@ -129,21 +160,21 @@ public class UserController {
         }
         return ResultFactory.buildSuccessResult("修改密码成功。");
     }
-    @RequestMapping("/greeting")
-    public String hello() {
-        return "hello";
-    }
 
-    @RequestMapping("/bye")
-    public String bye() {
-        return "bye";
-    }
-
+    /**
+     * 返回所有用户
+     * @return List<User>
+     */
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
+    /**
+     * 添加用户
+     * @param user
+     * @return int
+     */
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public int addUser(@RequestBody User user) {
         return userService.addUser(user);
