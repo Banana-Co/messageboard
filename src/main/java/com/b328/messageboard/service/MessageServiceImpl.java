@@ -1,5 +1,7 @@
 package com.b328.messageboard.service;
 
+import com.b328.messageboard.entity.Likes;
+import com.b328.messageboard.mapper.LikesMapper;
 import com.b328.messageboard.mapper.MessageMapper;
 import com.b328.messageboard.entity.Message;
 import com.b328.messageboard.service.MessageService;
@@ -15,6 +17,8 @@ import java.util.List;
 public class MessageServiceImpl implements MessageService {
     @Autowired
     MessageMapper messageMapper;
+    @Autowired
+    LikesMapper likesMapper;
 
     @Override
     public List<Message> getMessagePage(Integer pageNum, Integer pageSize) {
@@ -23,18 +27,66 @@ public class MessageServiceImpl implements MessageService {
         return messages;
     }
 
+    /**
+     * 通过id查找留言信息
+     * @param id
+     * @return message
+     */
     @Override
     public Message getMessageById(Integer id) {
         return messageMapper.getMessageById(id);
     }
 
+    /**
+     * 向message表中添加一条数据
+     * @param message
+     * @return
+     */
     @Override
     public int addMessage(Message message) {
         return messageMapper.addMessage(message);
     }
 
+    /**
+     * 更新message表中的赞数，同时向Likes表中插入记录
+     * @param message
+     * @Param uid
+     * @return
+     */
     @Override
-    public void changeLike(Message message) {
+    public void addLike(Message message, Integer uid) {
         messageMapper.changeLike(message);
+        Likes likes = new Likes();
+        likes.setMessage_id(message.getId());
+        likes.setUser_id(uid);
+        likesMapper.addLike(likes);
     }
+
+    /**
+     * 更新message表中的赞数，同时删除Likes表中的记录
+     * @param message
+     * @Param uid
+     * @return
+     */
+    @Override
+    public void addDislike(Message message, Integer uid){
+        messageMapper.changeLike(message);
+        Likes likes = new Likes();
+        likes.setMessage_id(message.getId());
+        likes.setUser_id(uid);
+        likesMapper.addDislike(likes);
+    }
+
+    /**
+     * 判断当前赞是否存在
+     * @param likes
+     * @return
+     */
+    @Override
+    public boolean hasLike(Likes likes){
+        if(likesMapper.hasLike(likes) == null)
+            return false;
+        return true;
+    }
+
 }

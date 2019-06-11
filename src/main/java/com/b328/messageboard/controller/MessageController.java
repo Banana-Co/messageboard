@@ -1,6 +1,8 @@
 package com.b328.messageboard.controller;
 
+import com.b328.messageboard.entity.Likes;
 import com.b328.messageboard.entity.Message;
+import com.b328.messageboard.entity.vo.LikeInfoVo;
 import com.b328.messageboard.entity.vo.MessagePageVo;
 import com.b328.messageboard.service.MessageService;
 import com.github.pagehelper.PageInfo;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin
@@ -16,6 +19,12 @@ public class MessageController {
     @Autowired
     @Qualifier("MessageService1")
     MessageService messageService;
+
+    /**
+     *
+     * @param messagePageVo
+     * @return
+     */
     @CrossOrigin
     @RequestMapping(value = "/getMessagePage", method = RequestMethod.POST)
     @ResponseBody
@@ -24,12 +33,23 @@ public class MessageController {
         PageInfo<Message> pageInfo = new PageInfo<>(messages);
         return pageInfo;
     }
+
+    /**
+     * 通过id检索留言信息
+     * @param id
+     * @return
+     */
     @CrossOrigin
     @RequestMapping(value = "/getMessage/{id}", method = RequestMethod.GET)
     public Message getMessageById(@PathVariable(name = "id") int id) {
         return messageService.getMessageById(id);
     }
 
+    /**
+     * 添加一个留言
+     * @param message
+     * @return
+     */
     @CrossOrigin
     @RequestMapping(value = "/addMessage", method = RequestMethod.POST)
     @ResponseBody
@@ -39,22 +59,79 @@ public class MessageController {
         return messageService.addMessage(message);
     }
 
+    /**
+     * 为当前留言添加一个赞
+     * @param likeInfoVo
+     * @return
+     */
     @CrossOrigin
     @RequestMapping(value = "/addLike/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public void addLike(@PathVariable(name = "id") int id) {
-        Message message=messageService.getMessageById(id);
-        message.setLike_number(message.getLike_number()+1);
-        messageService.changeLike(message);
+    public void addLike(/*@PathVariable(name = "id") int id*/@Valid @RequestBody LikeInfoVo likeInfoVo) {
+        Likes likes = new Likes();
+        likes.Vo2Likes(likeInfoVo);
+        if(hasLike(likes)) {
+            Message message = messageService.getMessageById(likeInfoVo.getMessage_id());
+            message.setLike_number(message.getLike_number() + 1);
+            messageService.addLike(message, likeInfoVo.getUser_id());
+        }
     }
 
+    /**
+     * 为当前留言取消一个赞
+     * @param likeInfoVo
+     * @return
+     */
     @CrossOrigin
     @RequestMapping(value = "/addDislike/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public void addDislike(@PathVariable(name = "id") int id) {
-        Message message=messageService.getMessageById(id);
-        message.setLike_number(message.getLike_number()-1);
-        messageService.changeLike(message);
+    public void addDislike(/*@PathVariable(name = "id") int id*/@Valid @RequestBody LikeInfoVo likeInfoVo) {
+        Likes likes = new Likes();
+        likes.Vo2Likes(likeInfoVo);
+        if(hasLike(likes)) {
+            Message message = messageService.getMessageById(likeInfoVo.getMessage_id());
+            message.setLike_number(message.getLike_number() - 1);
+            messageService.addDislike(message, likeInfoVo.getUser_id());
+        }
     }
 
+    /**
+     * 判断是否存在此点赞信息
+     * @param likes
+     * @return
+     */
+    public boolean hasLike(Likes likes){
+        return messageService.hasLike(likes);
+    }
+
+
+//    /**
+//     * 为当前留言添加一个赞
+//     * @param id
+//     * @return
+//     */
+//    @CrossOrigin
+//    @RequestMapping(value = "/addLike/{id}", method = RequestMethod.POST)
+//    @ResponseBody
+//    public void addLike(@PathVariable(name = "id") int id) {
+//
+//        Message message = messageService.getMessageById(id);
+//        message.setLike_number(message.getLike_number() + 1);
+//        messageService.addLike(message, 14);
+//
+//    }
+//
+//    /**
+//     * 为当前留言取消一个赞
+//     * @param id
+//     * @return
+//     */
+//    @CrossOrigin
+//    @RequestMapping(value = "/addDislike/{id}", method = RequestMethod.POST)
+//    @ResponseBody
+//    public void addDislike(@PathVariable(name = "id") int id) {
+//        Message message = messageService.getMessageById(id);
+//        message.setLike_number(message.getLike_number() - 1);
+//        messageService.addDislike(message, 14);
+//    }
 }

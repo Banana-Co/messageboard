@@ -7,7 +7,7 @@ import com.b328.messageboard.result.Result;
 import com.b328.messageboard.result.ResultCode;
 import com.b328.messageboard.result.ResultFactory;
 import com.b328.messageboard.service.IUserService;
-import com.b328.blockchain.util.Md5SaltTool;
+import com.b328.messageboard.util.Md5SaltTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
