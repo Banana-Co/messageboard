@@ -11,4 +11,5 @@ public interface MessageService {
     Message getMessageById(Integer id);
 
     int addMessage(Message message);
+    void changeLike(Message message);
 }

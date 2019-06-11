@@ -1,7 +1,8 @@
-package com.b328.messageboard.service;
+package com.b328.messageboard.serviceimpl;
 
 import com.b328.messageboard.dao.MessageMapper;
 import com.b328.messageboard.entity.Message;
+import com.b328.messageboard.service.MessageService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Service
 @Qualifier("MessageService1")
-public class MessageServiceImpl implements MessageService{
+public class MessageServiceImpl implements MessageService {
     @Autowired
     MessageMapper messageMapper;
 
@@ -30,5 +31,10 @@ public class MessageServiceImpl implements MessageService{
     @Override
     public int addMessage(Message message) {
         return messageMapper.addMessage(message);
+    }
+
+    @Override
+    public void changeLike(Message message) {
+        messageMapper.changeLike(message);
     }
 }

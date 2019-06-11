@@ -84,6 +84,7 @@ public class UserController {
             }
             encryptedPwd = Md5SaltTool.getEncryptedPwd(changPswdVo.getNew_password());
             user.setUser_password(encryptedPwd);
+            userService.changePswd(user);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -118,6 +119,7 @@ public class UserController {
                 return ResultFactory.buildFailResult(ResultCode.FAIL);
             }
             encryptedPwd = Md5SaltTool.getEncryptedPwd(new_password);
+
             user.setUser_password(encryptedPwd);
             userService.changePswd(user);
         } catch (NoSuchAlgorithmException e) {

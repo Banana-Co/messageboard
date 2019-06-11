@@ -1,10 +1,7 @@
 package com.b328.messageboard.dao;
 
 import com.b328.messageboard.entity.Message;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,4 +17,7 @@ public interface MessageMapper {
 
     @Insert("INSERT INTO Message(create_date, author, title, content) VALUES(NOW(), #{author}, #{title}, #{content})")
     int addMessage(Message message);
+
+    @Update("UPDATE Message SET like_number = #{like_number} where id = #{id}")
+    int changeLike(Message message);
 }
