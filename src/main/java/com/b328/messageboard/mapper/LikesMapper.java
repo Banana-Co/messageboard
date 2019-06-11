@@ -4,6 +4,8 @@ import com.b328.messageboard.entity.Likes;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public interface LikesMapper {
@@ -14,5 +16,5 @@ public interface LikesMapper {
     void addDislike(Likes likes);
 
     @Select("SELECT * FROM Likes WHERE uid = #{user_id} AND mid = #{message_id}")
-    Likes hasLike(Likes likes);
+    List<Likes> hasLike(Likes likes);
 }

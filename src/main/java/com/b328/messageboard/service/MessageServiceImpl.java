@@ -84,7 +84,7 @@ public class MessageServiceImpl implements MessageService {
      */
     @Override
     public boolean hasLike(Likes likes){
-        if(likesMapper.hasLike(likes) == null)
+        if(likesMapper.hasLike(likes).isEmpty())
             return false;
         return true;
     }

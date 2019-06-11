@@ -5,6 +5,9 @@ import com.b328.messageboard.entity.Message;
 import com.b328.messageboard.entity.vo.LikeInfoVo;
 import com.b328.messageboard.entity.vo.MessagePageVo;
 import com.b328.messageboard.mapper.UserMapper;
+import com.b328.messageboard.result.Result;
+import com.b328.messageboard.result.ResultCode;
+import com.b328.messageboard.result.ResultFactory;
 import com.b328.messageboard.service.MessageService;
 import com.b328.messageboard.service.UserService;
 import com.github.pagehelper.PageInfo;
@@ -71,15 +74,18 @@ public class MessageController {
     @CrossOrigin
     @RequestMapping(value = "/addLike", method = RequestMethod.POST)
     @ResponseBody
-    public void addLike(/*@PathVariable(name = "id") int id*/@Valid @RequestBody LikeInfoVo likeInfoVo) {
+    public Result addLike(/*@PathVariable(name = "id") int id*/@Valid @RequestBody LikeInfoVo likeInfoVo) {
         Integer uid = userService.getIdByName(likeInfoVo.getUser_name());
         Likes likes = new Likes();
         likes.setMessage_id(likeInfoVo.getMessage_id());
         likes.setUser_id(uid);
-        if(hasLike(likes)) {
+        if(!hasLike(likes)) {
             Message message = messageService.getMessageById(likeInfoVo.getMessage_id());
             message.setLike_number(message.getLike_number() + 1);
             messageService.addLike(message,uid);
+            return ResultFactory.buildSuccessResult("成功");
+        }else {
+            return ResultFactory.buildFailResult(ResultCode.FAIL);
         }
     }
 
