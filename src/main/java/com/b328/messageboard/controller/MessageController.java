@@ -116,34 +116,4 @@ public class MessageController {
         return IMessageService.hasLike(likes);
     }
 
-
-//    /**
-//     * 为当前留言添加一个赞
-//     * @param id
-//     * @return
-//     */
-//    @CrossOrigin
-//    @RequestMapping(value = "/addLike/{id}", method = RequestMethod.POST)
-//    @ResponseBody
-//    public void addLike(@PathVariable(name = "id") int id) {
-//
-//        Message message = IMessageService.getMessageById(id);
-//        message.setLike_number(message.getLike_number() + 1);
-//        IMessageService.addLike(message, 14);
-//
-//    }
-//
-//    /**
-//     * 为当前留言取消一个赞
-//     * @param id
-//     * @return
-//     */
-//    @CrossOrigin
-//    @RequestMapping(value = "/addDislike/{id}", method = RequestMethod.POST)
-//    @ResponseBody
-//    public void addDislike(@PathVariable(name = "id") int id) {
-//        Message message = IMessageService.getMessageById(id);
-//        message.setLike_number(message.getLike_number() - 1);
-//        IMessageService.addDislike(message, 14);
-//    }
 }
