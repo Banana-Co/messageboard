@@ -1,4 +1,4 @@
-package com.b328.blockchain.util;
+package com.b328.messageboard.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
