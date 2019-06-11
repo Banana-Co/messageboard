@@ -4,7 +4,9 @@ import com.b328.messageboard.entity.Likes;
 import com.b328.messageboard.entity.Message;
 import com.b328.messageboard.entity.vo.LikeInfoVo;
 import com.b328.messageboard.entity.vo.MessagePageVo;
+import com.b328.messageboard.mapper.UserMapper;
 import com.b328.messageboard.service.MessageService;
+import com.b328.messageboard.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,6 +21,8 @@ public class MessageController {
     @Autowired
     @Qualifier("MessageService1")
     MessageService messageService;
+    @Autowired
+    UserService userService;
 
     /**
      *
@@ -68,12 +72,14 @@ public class MessageController {
     @RequestMapping(value = "/addLike/{id}", method = RequestMethod.POST)
     @ResponseBody
     public void addLike(/*@PathVariable(name = "id") int id*/@Valid @RequestBody LikeInfoVo likeInfoVo) {
+        Integer uid = userService.getIdByName(likeInfoVo.getUser_name());
         Likes likes = new Likes();
-        likes.Vo2Likes(likeInfoVo);
+        likes.setMessage_id(likeInfoVo.getMessage_id());
+        likes.setUser_id(uid);
         if(hasLike(likes)) {
             Message message = messageService.getMessageById(likeInfoVo.getMessage_id());
             message.setLike_number(message.getLike_number() + 1);
-            messageService.addLike(message, likeInfoVo.getUser_id());
+            messageService.addLike(message,uid);
         }
     }
 
@@ -86,12 +92,14 @@ public class MessageController {
     @RequestMapping(value = "/addDislike/{id}", method = RequestMethod.POST)
     @ResponseBody
     public void addDislike(/*@PathVariable(name = "id") int id*/@Valid @RequestBody LikeInfoVo likeInfoVo) {
+        Integer uid = userService.getIdByName(likeInfoVo.getUser_name());
         Likes likes = new Likes();
-        likes.Vo2Likes(likeInfoVo);
+        likes.setMessage_id(likeInfoVo.getMessage_id());
+        likes.setUser_id(uid);
         if(hasLike(likes)) {
             Message message = messageService.getMessageById(likeInfoVo.getMessage_id());
             message.setLike_number(message.getLike_number() - 1);
-            messageService.addDislike(message, likeInfoVo.getUser_id());
+            messageService.addDislike(message,uid);
         }
     }
 

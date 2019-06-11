@@ -6,16 +6,6 @@ public class Likes {
     private Integer user_id;
     private Integer message_id;
 
-    /**
-     * 将LikeInfoVo类转为Likes类
-     * @param likeInfoVo
-     * @return
-     */
-    public void Vo2Likes(LikeInfoVo likeInfoVo){
-        this.message_id = likeInfoVo.getMessage_id();
-        this.user_id = likeInfoVo.getUser_id();
-    }
-
     public Integer getUser_id() {
         return user_id;
     }

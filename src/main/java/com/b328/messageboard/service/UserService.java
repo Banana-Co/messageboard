@@ -35,6 +35,7 @@ public class UserService implements IUserService {
         return userMapper.getUser(user_name);
     }
 
-
+    @Override
+    public Integer getIdByName(String user_name){return userMapper.getIdByName(user_name);}
 
 }
