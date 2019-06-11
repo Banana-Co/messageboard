@@ -5,12 +5,18 @@ public enum ResultCode {
      * 成功
      */
     SUCCESS(200),
+    /**
+     * 已存在
+     */
     HaveExist(201),
     /**
-     * 失败
+     * 未存在
      */
     NotExist(300),
 
+    /**
+     * 失败
+     */
     FAIL(400),
 
     /**
@@ -28,6 +34,9 @@ public enum ResultCode {
      */
     INTERNAL_SERVER_ERROR(500);
 
+    /**
+     * 状态码
+     */
     public int code;
 
     ResultCode(int code) {
