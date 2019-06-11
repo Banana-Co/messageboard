@@ -11,6 +11,12 @@ import javax.validation.Valid;
 public class TestController {
     @Autowired
     private IUserService userService;
+
+    /**
+     * 
+     * @param vueLoginInfoVo
+     * @return String
+     */
     @CrossOrigin
     @RequestMapping(value = "/time", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     public String getTime(@Valid @RequestBody VueUserNameVo vueLoginInfoVo) {

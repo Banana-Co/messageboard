@@ -13,6 +13,11 @@ public class AvatarController {
     @Autowired
     UserService userService;
 
+    /**
+     * 接受从前端上传的图片
+     * @param avatarVo
+     * @return String
+     */
     @CrossOrigin
     @RequestMapping(value = "/addImage", method = RequestMethod.POST)
     @ResponseBody

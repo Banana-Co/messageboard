@@ -4,11 +4,10 @@ import com.b328.messageboard.entity.Likes;
 import com.b328.messageboard.entity.Message;
 import com.b328.messageboard.entity.vo.LikeInfoVo;
 import com.b328.messageboard.entity.vo.MessagePageVo;
-import com.b328.messageboard.mapper.UserMapper;
 import com.b328.messageboard.result.Result;
 import com.b328.messageboard.result.ResultCode;
 import com.b328.messageboard.result.ResultFactory;
-import com.b328.messageboard.service.MessageService;
+import com.b328.messageboard.service.IMessageService;
 import com.b328.messageboard.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ import java.util.List;
 public class MessageController {
     @Autowired
     @Qualifier("MessageService1")
-    MessageService messageService;
+    IMessageService IMessageService;
     @Autowired
     UserService userService;
 
@@ -36,7 +35,7 @@ public class MessageController {
     @RequestMapping(value = "/getMessagePage", method = RequestMethod.POST)
     @ResponseBody
     public PageInfo<Message> getMessagePage(@RequestBody MessagePageVo messagePageVo) {
-        List<Message> messages = messageService.getMessagePage(messagePageVo.getPageNum(), messagePageVo.getPageSize());
+        List<Message> messages = IMessageService.getMessagePage(messagePageVo.getPageNum(), messagePageVo.getPageSize());
         PageInfo<Message> pageInfo = new PageInfo<>(messages);
         return pageInfo;
     }
@@ -49,7 +48,7 @@ public class MessageController {
     @CrossOrigin
     @RequestMapping(value = "/getMessage/{id}", method = RequestMethod.GET)
     public Message getMessageById(@PathVariable(name = "id") int id) {
-        return messageService.getMessageById(id);
+        return IMessageService.getMessageById(id);
     }
 
     /**
@@ -63,7 +62,7 @@ public class MessageController {
     public int addMessage(@RequestBody Message message) {
         if (message.getContent().equals("") || message.getTitle().equals(""))
             return 0;
-        return messageService.addMessage(message);
+        return IMessageService.addMessage(message);
     }
 
     /**
@@ -80,9 +79,9 @@ public class MessageController {
         likes.setMessage_id(likeInfoVo.getMessage_id());
         likes.setUser_id(uid);
         if(!hasLike(likes)) {
-            Message message = messageService.getMessageById(likeInfoVo.getMessage_id());
+            Message message = IMessageService.getMessageById(likeInfoVo.getMessage_id());
             message.setLike_number(message.getLike_number() + 1);
-            messageService.addLike(message,uid);
+            IMessageService.addLike(message,uid);
             return ResultFactory.buildSuccessResult("成功");
         }else {
             return ResultFactory.buildFailResult(ResultCode.FAIL);
@@ -103,9 +102,9 @@ public class MessageController {
         likes.setMessage_id(likeInfoVo.getMessage_id());
         likes.setUser_id(uid);
         if(hasLike(likes)) {
-            Message message = messageService.getMessageById(likeInfoVo.getMessage_id());
+            Message message = IMessageService.getMessageById(likeInfoVo.getMessage_id());
             message.setLike_number(message.getLike_number() - 1);
-            messageService.addDislike(message,uid);
+            IMessageService.addDislike(message,uid);
         }
     }
 
@@ -115,7 +114,7 @@ public class MessageController {
      * @return
      */
     public boolean hasLike(Likes likes){
-        return messageService.hasLike(likes);
+        return IMessageService.hasLike(likes);
     }
 
 
@@ -129,9 +128,9 @@ public class MessageController {
 //    @ResponseBody
 //    public void addLike(@PathVariable(name = "id") int id) {
 //
-//        Message message = messageService.getMessageById(id);
+//        Message message = IMessageService.getMessageById(id);
 //        message.setLike_number(message.getLike_number() + 1);
-//        messageService.addLike(message, 14);
+//        IMessageService.addLike(message, 14);
 //
 //    }
 //
@@ -144,8 +143,8 @@ public class MessageController {
 //    @RequestMapping(value = "/addDislike/{id}", method = RequestMethod.POST)
 //    @ResponseBody
 //    public void addDislike(@PathVariable(name = "id") int id) {
-//        Message message = messageService.getMessageById(id);
+//        Message message = IMessageService.getMessageById(id);
 //        message.setLike_number(message.getLike_number() - 1);
-//        messageService.addDislike(message, 14);
+//        IMessageService.addDislike(message, 14);
 //    }
 }
