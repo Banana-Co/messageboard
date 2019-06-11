@@ -25,6 +25,11 @@ public enum ResultCode {
     UNAUTHORIZED(401),
 
     /**
+     * 密码无效
+     */
+    INVALID_PASSWORD(402),
+
+    /**
      * 接口不存在
      */
     NOT_FOUND(404),
@@ -33,6 +38,8 @@ public enum ResultCode {
      * 服务器内部错误
      */
     INTERNAL_SERVER_ERROR(500);
+
+
 
     /**
      * 状态码

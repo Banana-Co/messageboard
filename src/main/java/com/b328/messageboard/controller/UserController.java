@@ -70,6 +70,8 @@ public class UserController {
         }else if (loginInfoVo.getUsername().equals("")||loginInfoVo.getPassword().equals("")){
             return ResultFactory.buildFailResult(ResultCode.FAIL);
         }
+        if(!rexCheckPassword(loginInfoVo.getPassword()))
+            return ResultFactory.buildFailResult(ResultCode.INVALID_PASSWORD);
         User user1=new User();
         String encryptedPwd = null;
         try {
@@ -85,6 +87,16 @@ public class UserController {
         return ResultFactory.buildSuccessResult("注册成功。");
     }
 
+    /**
+     * 正则表达式验证密码
+     * @param input
+     * @return
+     */
+    public static boolean rexCheckPassword(String input) {
+        // 6-20 位，字母、数字、字符
+        String regStr = "^([A-Z]|[a-z]|[0-9]|[`~!@#$%^&*()+=|{}':;',\\\\[\\\\].<>/?~！@#￥%……&*（）――+|{}【】‘；：”“'。，、？]){6,20}$";
+        return input.matches(regStr);
+    }
 
     /**
      * 修改密码
