@@ -1,8 +1,8 @@
 package com.b328.messageboard.controller;
 
 import com.b328.messageboard.entity.User;
-import com.b328.messageboard.pojo.vo.VueChangPswdVo;
-import com.b328.messageboard.pojo.vo.VueLoginInfoVo;
+import com.b328.messageboard.entity.vo.VueChangPswdVo;
+import com.b328.messageboard.entity.vo.VueLoginInfoVo;
 import com.b328.messageboard.result.Result;
 import com.b328.messageboard.result.ResultCode;
 import com.b328.messageboard.result.ResultFactory;

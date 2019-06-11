@@ -1,6 +1,6 @@
-package com.b328.messageboard.serviceimpl;
+package com.b328.messageboard.service;
 
-import com.b328.messageboard.dao.MessageMapper;
+import com.b328.messageboard.mapper.MessageMapper;
 import com.b328.messageboard.entity.Message;
 import com.b328.messageboard.service.MessageService;
 import com.github.pagehelper.PageHelper;

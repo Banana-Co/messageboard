@@ -1,6 +1,6 @@
 package com.b328.messageboard.controller;
 
-import com.b328.messageboard.pojo.vo.VueUserNameVo;
+import com.b328.messageboard.entity.vo.VueUserNameVo;
 import com.b328.messageboard.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

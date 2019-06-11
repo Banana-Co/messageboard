@@ -1,8 +1,8 @@
 package com.b328.messageboard.controller;
 
 
-import com.b328.messageboard.pojo.vo.VueAvatarVo;
-import com.b328.messageboard.serviceimpl.UserService;
+import com.b328.messageboard.entity.vo.VueAvatarVo;
+import com.b328.messageboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

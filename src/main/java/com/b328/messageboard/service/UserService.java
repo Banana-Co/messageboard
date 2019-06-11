@@ -1,4 +1,4 @@
-package com.b328.messageboard.serviceimpl;
+package com.b328.messageboard.service;
 
 import com.b328.messageboard.entity.User;
 import com.b328.messageboard.mapper.UserMapper;

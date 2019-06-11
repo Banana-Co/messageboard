@@ -1,4 +1,4 @@
-package com.b328.messageboard.dao;
+package com.b328.messageboard.mapper;
 
 import com.b328.messageboard.entity.Message;
 import org.apache.ibatis.annotations.*;

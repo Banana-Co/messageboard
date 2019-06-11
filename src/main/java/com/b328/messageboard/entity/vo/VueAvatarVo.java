@@ -1,4 +1,4 @@
-package com.b328.messageboard.pojo.vo;
+package com.b328.messageboard.entity.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 
