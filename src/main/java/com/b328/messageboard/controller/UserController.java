@@ -112,6 +112,8 @@ public class UserController {
             if (!Md5SaltTool.validPassword(changPswdVo.getOld_password(),user.getUser_password())){
                 return ResultFactory.buildFailResult(ResultCode.FAIL);
             }
+            if(!rexCheckPassword(changPswdVo.getNew_password()))
+                return ResultFactory.buildFailResult(ResultCode.INVALID_PASSWORD);
             encryptedPwd = Md5SaltTool.getEncryptedPwd(changPswdVo.getNew_password());
             user.setUser_password(encryptedPwd);
             userService.changePswd(user);
