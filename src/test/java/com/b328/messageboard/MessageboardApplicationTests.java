@@ -11,6 +11,7 @@ public class MessageboardApplicationTests {
 
     @Test
     public void contextLoads() {
+        System.out.println();
     }
 
 }
