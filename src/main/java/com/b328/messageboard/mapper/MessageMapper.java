@@ -12,7 +12,7 @@ public interface MessageMapper {
      * 返回所有留言
      * @return  List<Message>
      */
-    @Select("SELECT * FROM Message ORDER BY id DESC")
+    @Select("SELECT * FROM Message ORDER BY like_number DESC,id DESC")
     @Results(@Result(property = "createDate", column = "create_date"))
     List<Message> getAllMessages();
 
@@ -29,7 +29,7 @@ public interface MessageMapper {
      * @param message
      * @return int
      */
-    @Insert("INSERT INTO Message(create_date, author, title, content) VALUES(NOW(), #{author}, #{title}, #{content})")
+    @Insert("INSERT INTO Message(create_date, author, title, content) VALUES(#{createDate}, #{author}, #{title}, #{content})")
     int addMessage(Message message);
 
     /**
