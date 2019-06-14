@@ -31,6 +31,15 @@ public class Message {
      */
     private int like_number;
 
+    /**
+     * 甲方
+     */
+    private String partyA;
+    /**
+     * 乙方
+     */
+    private String partyB;
+
     public int getLike_number() {
         return like_number;
     }
@@ -79,5 +88,21 @@ public class Message {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getPartyA() {
+        return partyA;
+    }
+
+    public void setPartyA(String partyA) {
+        this.partyA = partyA;
+    }
+
+    public String getPartyB() {
+        return partyB;
+    }
+
+    public void setPartyB(String partyB) {
+        this.partyB = partyB;
     }
 }

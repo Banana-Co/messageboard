@@ -60,7 +60,7 @@ public class MessageController {
     @RequestMapping(value = "/addMessage", method = RequestMethod.POST)
     @ResponseBody
     public int addMessage(@RequestBody Message message) {
-        if (message.getContent().equals("") || message.getTitle().equals(""))
+        if (message.getContent().equals("") || message.getTitle().equals("")||message.getPartyA().equals("")||message.getPartyB().equals(""))
             return 0;
         return IMessageService.addMessage(message);
     }
