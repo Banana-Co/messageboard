@@ -29,7 +29,7 @@ public interface MessageMapper {
      * @param message
      * @return int
      */
-    @Insert("INSERT INTO Message(create_date, author, title, content) VALUES(#{createDate}, #{author}, #{title}, #{content})")
+    @Insert("INSERT INTO Message(create_date, author, title, content, partyA, partyB) VALUES(#{createDate}, #{author}, #{title}, #{content}, #{partyA}, #{partyB})")
     int addMessage(Message message);
 
     /**

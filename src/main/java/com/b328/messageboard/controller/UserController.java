@@ -179,7 +179,8 @@ public class UserController {
      * 返回所有用户
      * @return List<User>
      */
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @CrossOrigin
+    @RequestMapping(value = "/user", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
@@ -189,6 +190,7 @@ public class UserController {
      * @param user
      * @return int
      */
+    @CrossOrigin
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public int addUser(@RequestBody User user) {
         return userService.addUser(user);
